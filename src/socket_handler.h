@@ -5,5 +5,6 @@
 
 int create_listen_socket(int port);
 int accept_client_socket(int fd_listen);
+int connect_server(char ipv4[], int port);
 
 #endif

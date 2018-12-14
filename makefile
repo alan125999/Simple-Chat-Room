@@ -1,15 +1,15 @@
 ### Environment ###
 # Set Compiler
 CC := gcc
-CFLAGS := -Wall
+CFLAGS := -Wall 
 
 # Directories
 DIR_SRC := ./src
-DIR_OBJ := ./
+DIR_OBJ := ./build
 DIR_BIN := ./bin
 
 # Targets
-TARGETS = server
+TARGETS = server client
 
 ### Parse ###
 DIR_CREATE := ${DIR_OBJ} ${DIR_BIN}
@@ -35,11 +35,11 @@ ${DIR_BIN}/%: ${DIR_OBJ}/%.o ${OBJ}
 
 # Remove Object Files
 clean: 
-	rm -rf ${OBJ} ${OBJ_TARGETS}
+	rm -rf ${DIR_OBJ}
 
 # Remove All Files Compiled
 distclean: clean
-	rm -rf ${DIR_BIN}
+	rm -rf ${DIR_BIN} ${DIR_OBJ}
 
 .PHONY: all clean distclean
-.SECONDARY: ${OBJ}
+.SECONDARY: ${OBJ} 
