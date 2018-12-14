@@ -29,7 +29,7 @@ int serve_client(int fd_accept, struct User user_list[]){
     if(user_index < 0) return -1;
 
     get_time(time_str);
-    sprintf(buffer2, "[ SERVER @ %s ]\n%s joined the room!\n\n", time_str, user_list[user_index].name);
+    sprintf(buffer2, "[ \033[31mSERVER\033[m @ %s ]\n%s joined the room!\n\n", time_str, user_list[user_index].name);
     serve_send_all(buffer2, user_index, user_list);
 
     for( ; ; ){
@@ -48,7 +48,7 @@ int serve_client(int fd_accept, struct User user_list[]){
         }
         else{
             get_time(time_str);
-            sprintf(buffer2, "[ %s @ %s ]\n", user_list[user_index].name, time_str);
+            sprintf(buffer2, "[ \033[32m%s\033[m @ %s ]\n", user_list[user_index].name, time_str);
             strncat(buffer2, buffer, strlen(buffer));
             strncat(buffer2, "\n", strlen("\n"));
             serve_send_all(buffer2, user_index, user_list);
@@ -110,10 +110,11 @@ int serve_command(char buffer[], int user, struct User user_list[]){
         "/help: Show this message\n"
         "/users: Show online users\n"
         "/msg <user> <message>: Send private message to specific user\n"
-        "/send <user> <file_path>: Send file to specific user\n"
-        "/abort <user>: Abort to send file to specific user\n"
-        "/recv <user> <file_path>: Receive file from specific user\n"
-        "/reject <user>: Reject to receive file";
+        "\n";
+        //"/send <user> <file_path>: Send file to specific user\n"
+        //"/abort <user>: Abort to send file to specific user\n"
+        //"/recv <user> <file_path>: Receive file from specific user\n"
+        //"/reject <user>: Reject to receive file";
     char unknown_msg[] = 
         "Undefined command\n\n";
     char users_msg[] = 
@@ -166,7 +167,7 @@ int serve_command(char buffer[], int user, struct User user_list[]){
         }
         else{
             get_time(time_str);
-            sprintf(buf, "[ %s -PM-> %s @ %s ]\n", user_list[user].name, token, time_str);
+            sprintf(buf, "[ \033[35m%s -PM-> %s\033[m @ %s ]\n", user_list[user].name, token, time_str);
             strncat(buf, next, strlen(next));
             strncat(buf, "\n", strlen("\n"));
             ret = serve_send_msg(buf, user, user_list);
