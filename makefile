@@ -1,7 +1,7 @@
 ### Environment ###
 # Set Compiler
 CC := gcc
-CFLAGS := -Wall 
+CFLAGS := -Wall -pthread
 
 # Directories
 DIR_SRC := ./src
@@ -31,7 +31,7 @@ ${DIR_OBJ}/%.o: ${DIR_SRC}/%.c
 
 # Link
 ${DIR_BIN}/%: ${DIR_OBJ}/%.o ${OBJ}
-	$(CC) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@
 
 # Remove Object Files
 clean: 
