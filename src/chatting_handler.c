@@ -7,6 +7,7 @@
 #include <sys/socket.h>
 #include <pthread.h>
 #include <time.h>
+#include <signal.h>
 
 #include "chatting_handler.h"
 #include "user.h"
